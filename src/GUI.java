@@ -6,8 +6,8 @@ import javax.swing.WindowConstants;
 public class GUI extends JFrame {
 
 	// Constants
-	final int marginH = 10;
-	final int marginV = 10;
+	final int marginH = 20;
+	final int marginV = 30;
 
 	public GUI( GraphArea gA) {
 		int graphAreaWidth = gA.getWidth();
@@ -21,9 +21,12 @@ public class GUI extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		GraphArea gA = new GraphArea(500, 400, 10, 10);
-//		Bresenham.drawLine(gA.getPixelArray(), 5, 30, 30, 5);
-		Bresenham.drawCircle(gA.getPixelArray(), 20, 20, 10);
+		GraphArea gA = new GraphArea(500, 500);
+		Bresenham.drawCircle(gA.getPixelArray(), 25,25,2);
+		Bresenham.drawCircle(gA.getPixelArray(), 25,25,4);
+		Bresenham.drawCircle(gA.getPixelArray(), 25,25,8);
+		Bresenham.drawCircle(gA.getPixelArray(), 25,25,16);
+		Bresenham.drawCircle(gA.getPixelArray(), 25,25,20);
 		GUI g = new GUI(gA);
 	}
 
