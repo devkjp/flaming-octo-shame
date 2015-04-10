@@ -22,7 +22,8 @@ public class GUI extends JFrame {
 
 	public static void main(String[] args) {
 		GraphArea gA = new GraphArea(500, 400, 10, 10);
-		Bresenham.drawLine(gA.getPixelArray(), 5, 30, 30, 5);
+//		Bresenham.drawLine(gA.getPixelArray(), 5, 30, 30, 5);
+		Bresenham.drawCircle(gA.getPixelArray(), 20, 20, 10);
 		GUI g = new GUI(gA);
 	}
 
