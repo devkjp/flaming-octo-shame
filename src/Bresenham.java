@@ -1,8 +1,6 @@
 public class Bresenham {
 
 	public static void drawLine(Boolean[][] canvas, int startX, int startY,	int endX, int endY) {
-		// Only works in Octant I
-		
 		// Steigungsdreieck berechnen ( m = deltaY / deltaX ) 
 		int deltaX = endX - startX;
 		int deltaY = endY - startY;
@@ -28,20 +26,16 @@ public class Bresenham {
 	}
 
 	public static void drawCircle(Boolean[][] canvas, int midX, int midY, int radius) {
-		// Source: 
-		// http://www-lehre.inf.uos.de/~cg/2002/skript/node37.html
+		// Vorbild: http://www-lehre.inf.uos.de/~cg/2002/skript/node37.html
+		
+		// Startkoordinaten
+		int xh = 0; int yh = radius;
+		int eps = 1 - radius; // Fehlervariable
 
-		int xh, yh, d, dx, dxy;
-
-		xh = 0; // Koordinaten retten
-		yh = radius;
-		d = 1 - radius;
-		dx = 3;
-		dxy = -2 * radius + 5;
-
-		while (yh >= xh) { // Fuer jede x-Koordinate
-			canvas[midX + xh][midY + yh] = true; // alle 8 Oktanden werden
-			canvas[midX + yh][midY + xh] = true; // gleichzeitig gesetzt
+		while (yh >= xh) {
+			// Setze für jedes X ein Pixel in allen Oktanten
+			canvas[midX + xh][midY + yh] = true; 
+			canvas[midX + yh][midY + xh] = true; 
 			canvas[midX + yh][midY - xh] = true;
 			canvas[midX + xh][midY - yh] = true;
 			canvas[midX - xh][midY - yh] = true;
@@ -49,18 +43,15 @@ public class Bresenham {
 			canvas[midX - yh][midY + xh] = true;
 			canvas[midX - xh][midY + yh] = true;
 
-			if (d < 0) { // Falls noch im Kreis
-				d += dx;
-				dx += 2;
-				dxy += 2;
-				xh++; // passend aktualisieren
-			} else { // Aus dem Kreis gelaufen
-				d += dxy;
-				dx += 2;
-				dxy += 4;
-				xh++;
-				yh--; // passend aktualisieren
+			if (eps < 0) {
+				// Die Kreislinie wurde noch nicht verlassen
+				eps += 2*xh + 3;
+			} else {
+				// Die Kreislinie wurde verlassen, yh muss vermindert werden
+				yh--; 
+				eps = 2*xh - 2*yh +5;
 			}
+			xh++;
 		}
 
 	};

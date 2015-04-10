@@ -9,18 +9,14 @@ public class GraphArea extends JPanel {
 	// Constants
 	final int graphAreaWidth;
 	final int graphAreaHeight;
-	final int marginH;
-	final int marginV;
 
 	Boolean[][] pixel;
 
-	public GraphArea(int gaWidth, int gaHeight, int marginH, int marginV) {
+	public GraphArea(int gaWidth, int gaHeight) {
 		this.graphAreaWidth = gaWidth;
 		this.graphAreaHeight = gaHeight;
-		this.marginH = marginH;
-		this.marginV = marginV;
 		
-		this.setSize(graphAreaWidth + marginH, graphAreaHeight + marginV);
+		this.setSize(graphAreaWidth, graphAreaHeight);
 		
 		pixel = new Boolean[gaWidth / 10][gaHeight / 10];
 		
