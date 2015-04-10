@@ -27,6 +27,8 @@ public class GUI extends JFrame {
 		Bresenham.drawCircle(gA.getPixelArray(), 25,25,8);
 		Bresenham.drawCircle(gA.getPixelArray(), 25,25,16);
 		Bresenham.drawCircle(gA.getPixelArray(), 25,25,20);
+		Bresenham.drawLine(gA.getPixelArray(), 5, 25, 22, 25);
+		Bresenham.drawLine(gA.getPixelArray(), 30, 25, 45, 25);
 		GUI g = new GUI(gA);
 	}
 
