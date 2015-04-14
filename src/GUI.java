@@ -23,12 +23,16 @@ public class GUI extends JFrame {
 	public static void main(String[] args) {
 		GraphArea gA = new GraphArea(500, 500);
 		Bresenham.drawCircle(gA.getPixelArray(), 25,25,2, GraphArea.color.BLACK);
-		Bresenham.drawCircle(gA.getPixelArray(), 25,25,4, GraphArea.color.RED);
-		Bresenham.drawCircle(gA.getPixelArray(), 25,25,8, GraphArea.color.WHITE);
-		Bresenham.drawCircle(gA.getPixelArray(), 25,25,16, GraphArea.color.GRAY);
+		Fuelleimer.fill(gA.getPixelArray(), 25, 25, GraphArea.color.BLACK);
+		Bresenham.drawCircle(gA.getPixelArray(), 25,25,5, GraphArea.color.BLACK);
+		Fuelleimer.fill(gA.getPixelArray(), 25, 22, GraphArea.color.WHITE);
 		Bresenham.drawCircle(gA.getPixelArray(), 25,25,20, GraphArea.color.BLACK);
-		Bresenham.drawLine(gA.getPixelArray(), 5, 25, 22, 25, GraphArea.color.BLACK);
+		Bresenham.drawLine(gA.getPixelArray(), 5, 25, 21, 25, GraphArea.color.BLACK);
 		Bresenham.drawLine(gA.getPixelArray(), 30, 25, 45, 25, GraphArea.color.BLACK);
+		Fuelleimer.fill(gA.getPixelArray(), 0, 0, GraphArea.color.GRAY);
+		Fuelleimer.fill(gA.getPixelArray(), 6, 24, GraphArea.color.RED);
+		Fuelleimer.fill(gA.getPixelArray(), 6, 26, GraphArea.color.WHITE);
+		
 		GUI g = new GUI(gA);
 	}
 
