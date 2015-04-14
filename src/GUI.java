@@ -22,13 +22,13 @@ public class GUI extends JFrame {
 
 	public static void main(String[] args) {
 		GraphArea gA = new GraphArea(500, 500);
-		Bresenham.drawCircle(gA.getPixelArray(), 25,25,2);
-		Bresenham.drawCircle(gA.getPixelArray(), 25,25,4);
-		Bresenham.drawCircle(gA.getPixelArray(), 25,25,8);
-		Bresenham.drawCircle(gA.getPixelArray(), 25,25,16);
-		Bresenham.drawCircle(gA.getPixelArray(), 25,25,20);
-		Bresenham.drawLine(gA.getPixelArray(), 5, 25, 22, 25);
-		Bresenham.drawLine(gA.getPixelArray(), 30, 25, 45, 25);
+		Bresenham.drawCircle(gA.getPixelArray(), 25,25,2, GraphArea.color.BLACK);
+		Bresenham.drawCircle(gA.getPixelArray(), 25,25,4, GraphArea.color.RED);
+		Bresenham.drawCircle(gA.getPixelArray(), 25,25,8, GraphArea.color.WHITE);
+		Bresenham.drawCircle(gA.getPixelArray(), 25,25,16, GraphArea.color.GRAY);
+		Bresenham.drawCircle(gA.getPixelArray(), 25,25,20, GraphArea.color.BLACK);
+		Bresenham.drawLine(gA.getPixelArray(), 5, 25, 22, 25, GraphArea.color.BLACK);
+		Bresenham.drawLine(gA.getPixelArray(), 30, 25, 45, 25, GraphArea.color.BLACK);
 		GUI g = new GUI(gA);
 	}
 

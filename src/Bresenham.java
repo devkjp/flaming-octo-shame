@@ -1,6 +1,6 @@
 public class Bresenham {
 
-	public static void drawLine(Boolean[][] canvas, int startX, int startY,	int endX, int endY) {
+	public static void drawLine(GraphArea.color[][] canvas, int startX, int startY,	int endX, int endY, GraphArea.color colorCode) {
 		// Steigungsdreieck berechnen ( m = deltaY / deltaX ) 
 		int deltaX = endX - startX;
 		int deltaY = endY - startY;
@@ -12,7 +12,7 @@ public class Bresenham {
 		// Laufe von startX bis endX schritt für schritt
 		for (int x = startX; x < endX; x++) {
 			// Setze das aktuelle Pixel
-			canvas[x][y] = true; 
+			canvas[x][y] = colorCode; 
 			
 			// Erreicht Fehler den Schwellwert?
 			if (eps > 0) {
@@ -25,7 +25,7 @@ public class Bresenham {
 		}
 	}
 
-	public static void drawCircle(Boolean[][] canvas, int midX, int midY, int radius) {
+	public static void drawCircle(GraphArea.color[][] canvas, int midX, int midY, int radius, GraphArea.color colorCode) {
 		// Vorbild: http://www-lehre.inf.uos.de/~cg/2002/skript/node37.html
 		
 		// Startkoordinaten
@@ -34,14 +34,14 @@ public class Bresenham {
 
 		while (yh >= xh) {
 			// Setze für jedes X ein Pixel in allen Oktanten
-			canvas[midX + xh][midY + yh] = true; 
-			canvas[midX + yh][midY + xh] = true; 
-			canvas[midX + yh][midY - xh] = true;
-			canvas[midX + xh][midY - yh] = true;
-			canvas[midX - xh][midY - yh] = true;
-			canvas[midX - yh][midY - xh] = true;
-			canvas[midX - yh][midY + xh] = true;
-			canvas[midX - xh][midY + yh] = true;
+			canvas[midX + xh][midY + yh] = colorCode; 
+			canvas[midX + yh][midY + xh] = colorCode; 
+			canvas[midX + yh][midY - xh] = colorCode;
+			canvas[midX + xh][midY - yh] = colorCode;
+			canvas[midX - xh][midY - yh] = colorCode;
+			canvas[midX - yh][midY - xh] = colorCode;
+			canvas[midX - yh][midY + xh] = colorCode;
+			canvas[midX - xh][midY + yh] = colorCode;
 
 			if (eps < 0) {
 				// Die Kreislinie wurde noch nicht verlassen
