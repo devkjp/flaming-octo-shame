@@ -12,6 +12,7 @@ public abstract class GraphAreaInterface extends JPanel {
 	final int graphAreaHeight;
 	
 	int pixelWidth;
+	color[][] pixel;
 	
 	public GraphAreaInterface(int gaWidth, int gaHeight, int pixelWidth) {
 		this.graphAreaWidth = gaWidth;
@@ -40,7 +41,6 @@ public abstract class GraphAreaInterface extends JPanel {
 		this.pixel = pixel;
 	}
 
-	color[][] pixel;
 	
 	protected Color getColorFromCode( color code ){
 		switch(code){
