@@ -1,6 +1,6 @@
 public class Bresenham {
 
-	public static void drawLine(GraphArea.color[][] canvas, int startX, int startY,	int endX, int endY, GraphArea.color colorCode) {
+	public static void drawLine(GraphArea.color[][] canvas, int startX, int startY,	int endX, int endY, GraphAreaInterface.color colorCode) {
 		// Steigungsdreieck berechnen ( m = deltaY / deltaX ) 
 		int deltaX = endX - startX;
 		int deltaY = endY - startY;
@@ -25,7 +25,7 @@ public class Bresenham {
 		}
 	}
 
-	public static void drawCircle(GraphArea.color[][] canvas, int midX, int midY, int radius, GraphArea.color colorCode) {
+	public static void drawCircle(GraphAreaInterface.color[][] canvas, int midX, int midY, int radius, GraphAreaInterface.color colorCode) {
 		// Vorbild: http://www-lehre.inf.uos.de/~cg/2002/skript/node37.html
 		
 		// Startkoordinaten

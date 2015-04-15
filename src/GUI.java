@@ -9,7 +9,7 @@ public class GUI extends JFrame {
 	final int marginH = 20;
 	final int marginV = 30;
 
-	public GUI( GraphArea gA) {
+	public GUI( GraphAreaInterface gA) {
 		int graphAreaWidth = gA.getWidth();
 		int graphAreaHeight = gA.getHeight();
 		
@@ -21,17 +21,17 @@ public class GUI extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		GraphArea gA = new GraphArea(500, 500);
-		Bresenham.drawCircle(gA.getPixelArray(), 25,25,2, GraphArea.color.BLACK);
-		Fuelleimer.iterSeedFill(gA.getPixelArray(), 25, 25, GraphArea.color.BLACK);
-		Bresenham.drawCircle(gA.getPixelArray(), 25,25,5, GraphArea.color.BLACK);
-		Fuelleimer.iterSeedFill(gA.getPixelArray(), 25, 22, GraphArea.color.WHITE);
-		Bresenham.drawCircle(gA.getPixelArray(), 25,25,20, GraphArea.color.BLACK);
-		Bresenham.drawLine(gA.getPixelArray(), 5, 25, 21, 25, GraphArea.color.BLACK);
-		Bresenham.drawLine(gA.getPixelArray(), 30, 25, 45, 25, GraphArea.color.BLACK);
-		Fuelleimer.iterSeedFill(gA.getPixelArray(), 0, 20, GraphArea.color.GRAY);
-		Fuelleimer.iterSeedFill(gA.getPixelArray(), 6, 24, GraphArea.color.RED);
-		Fuelleimer.iterSeedFill(gA.getPixelArray(), 6, 26, GraphArea.color.WHITE);
+		GraphAreaInterface gA = new GraphAreaJ2D(500, 500);
+		Bresenham.drawCircle(gA.getPixelArray(), 25,25,2, GraphAreaInterface.color.BLACK);
+		Fuelleimer.iterSeedFill(gA.getPixelArray(), 25, 25, GraphAreaInterface.color.BLACK);
+		Bresenham.drawCircle(gA.getPixelArray(), 25,25,5, GraphAreaInterface.color.BLACK);
+		Fuelleimer.iterSeedFill(gA.getPixelArray(), 25, 22, GraphAreaInterface.color.WHITE);
+		Bresenham.drawCircle(gA.getPixelArray(), 25,25,20, GraphAreaInterface.color.BLACK);
+		Bresenham.drawLine(gA.getPixelArray(), 5, 25, 21, 25, GraphAreaInterface.color.BLACK);
+		Bresenham.drawLine(gA.getPixelArray(), 30, 25, 45, 25, GraphAreaInterface.color.BLACK);
+		Fuelleimer.iterSeedFill(gA.getPixelArray(), 0, 20, GraphAreaInterface.color.GRAY);
+		Fuelleimer.iterSeedFill(gA.getPixelArray(), 6, 24, GraphAreaInterface.color.RED);
+		Fuelleimer.iterSeedFill(gA.getPixelArray(), 6, 26, GraphAreaInterface.color.WHITE);
 		GUI g = new GUI(gA);
 		
 	}
