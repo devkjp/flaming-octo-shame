@@ -1,30 +1,6 @@
 public class Bresenham {
 
-<<<<<<< HEAD
-	public static void drawLine(GraphArea.color[][] canvas, int startX, int startY,	int endX, int endY, GraphAreaInterface.color colorCode) {
-		// Steigungsdreieck berechnen ( m = deltaY / deltaX ) 
-		int deltaX = endX - startX;
-		int deltaY = endY - startY;
-		
-		// Fehlervariable initialisierun
-		int eps = deltaY - deltaX;
-		int y = startY;
-		
-		// Laufe von startX bis endX schritt für schritt
-		for (int x = startX; x < endX; x++) {
-			// Setze das aktuelle Pixel
-			canvas[x][y] = colorCode; 
-			
-			// Erreicht Fehler den Schwellwert?
-			if (eps > 0) {
-				// Springe ein Pixel nach oben und resette Fehler
-				y++;
-				eps -= deltaX;
-			}
-			// Fehler erhöhen
-			eps += deltaY;
-		}
-=======
+
 	public static void drawLine(GraphArea.color[][] canvas, int startX, int startY,	int endX, int endY, GraphArea.color colorCode) {
 	    int w = endX - startX ;
 	    int h = endY - startY ;
@@ -53,7 +29,31 @@ public class Bresenham {
 	            startY += dy2 ;
 	        }
 	    }
->>>>>>> origin/master
+	}
+	
+	public static void drawNiceCircle(GraphAreaInterface.color[][] canvas, final int centerX, final int centerY, final int radius, GraphAreaInterface.color code) {
+		int d = (5 - radius * 4)/4;
+		int x = 0;
+		int y = radius;
+ 
+		do {
+			
+			canvas[centerX + x][centerY + y] = code;
+			canvas[centerX + x][centerY - y] = code;
+			canvas[centerX - x][centerY + y] = code;
+			canvas[centerX - x][centerY - y] = code;
+			canvas[centerX + y][centerY + x] = code;
+			canvas[centerX + y][centerY - x] = code;
+			canvas[centerX - y][centerY + x] = code;
+			canvas[centerX - y][centerY - x] = code;
+			if (d < 0) {
+				d += 2 * x + 1;
+			} else {
+				d += 2 * (x - y) + 1;
+				y--;
+			}
+			x++;
+		} while (x <= y);
 	}
 
 	public static void drawCircle(GraphAreaInterface.color[][] canvas, int midX, int midY, int radius, GraphAreaInterface.color colorCode) {

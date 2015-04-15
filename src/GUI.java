@@ -21,18 +21,43 @@ public class GUI extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		GraphAreaInterface gA = new GraphAreaJ2D(500, 500);
-		Bresenham.drawCircle(gA.getPixelArray(), 25,25,2, GraphAreaInterface.color.BLACK);
+		
+		// Pokeball
+		GraphAreaInterface gA = new GraphArea(500, 500);
+		Bresenham.drawNiceCircle(gA.getPixelArray(), 25,25,2, GraphAreaInterface.color.BLACK);
 		Fuelleimer.iterSeedFill(gA.getPixelArray(), 25, 25, GraphAreaInterface.color.BLACK);
-		Bresenham.drawCircle(gA.getPixelArray(), 25,25,5, GraphAreaInterface.color.BLACK);
+		Bresenham.drawNiceCircle(gA.getPixelArray(), 25,25,5, GraphAreaInterface.color.BLACK);
 		Fuelleimer.iterSeedFill(gA.getPixelArray(), 25, 22, GraphAreaInterface.color.WHITE);
-		Bresenham.drawCircle(gA.getPixelArray(), 25,25,20, GraphAreaInterface.color.BLACK);
-		Bresenham.drawLine(gA.getPixelArray(), 5, 25, 21, 25, GraphAreaInterface.color.BLACK);
+		Bresenham.drawNiceCircle(gA.getPixelArray(), 25,25,20, GraphAreaInterface.color.BLACK);
+		Bresenham.drawLine(gA.getPixelArray(), 5, 25, 20, 25, GraphAreaInterface.color.BLACK);
 		Bresenham.drawLine(gA.getPixelArray(), 30, 25, 45, 25, GraphAreaInterface.color.BLACK);
 		Fuelleimer.iterSeedFill(gA.getPixelArray(), 0, 20, GraphAreaInterface.color.GRAY);
 		Fuelleimer.iterSeedFill(gA.getPixelArray(), 6, 24, GraphAreaInterface.color.RED);
 		Fuelleimer.iterSeedFill(gA.getPixelArray(), 6, 26, GraphAreaInterface.color.WHITE);
 		GUI g = new GUI(gA);
+		
+		// Linientest, auskommentieren wenn nicht GraphAreaJ2D verwendet wird (Pixelgröße)
+		GraphAreaInterface gA2 = new GraphAreaJ2D(500,500);
+		Bresenham.drawNiceCircle(gA2.getPixelArray(), 250,250,249, GraphAreaInterface.color.BLACK);
+		Bresenham.drawLine(gA2.getPixelArray(), 250,250,125,125,GraphAreaInterface.color.BLACK);
+		Bresenham.drawLine(gA2.getPixelArray(), 250,250,250,125,GraphAreaInterface.color.BLACK);
+		Bresenham.drawLine(gA2.getPixelArray(), 250,250,375,125,GraphAreaInterface.color.BLACK);
+		Bresenham.drawLine(gA2.getPixelArray(), 250,250,125,250,GraphAreaInterface.color.BLACK);
+		Bresenham.drawLine(gA2.getPixelArray(), 250,250,375,250,GraphAreaInterface.color.BLACK);
+		Bresenham.drawLine(gA2.getPixelArray(), 250,250,125,375,GraphAreaInterface.color.BLACK);
+		Bresenham.drawLine(gA2.getPixelArray(), 250,250,250,375,GraphAreaInterface.color.BLACK);
+		Bresenham.drawLine(gA2.getPixelArray(), 250,250,375,375,GraphAreaInterface.color.BLACK);
+		Bresenham.drawLine(gA2.getPixelArray(), 125,125,375,125,GraphAreaInterface.color.BLACK);
+		Bresenham.drawLine(gA2.getPixelArray(), 125,125,125,375,GraphAreaInterface.color.BLACK);
+		Bresenham.drawLine(gA2.getPixelArray(), 375,375,375,125,GraphAreaInterface.color.BLACK);
+		Bresenham.drawLine(gA2.getPixelArray(), 375,375,125,375,GraphAreaInterface.color.BLACK);
+		
+		Fuelleimer.iterSeedFill(gA2.getPixelArray(), 126, 127, GraphAreaInterface.color.GRAY);
+		
+		GUI g2 = new GUI(gA2);
+		
+		
+		
 		
 	}
 

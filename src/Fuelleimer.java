@@ -37,6 +37,7 @@ public class Fuelleimer {
 			s.push(new Point(x, y));
 		while (!s.isEmpty()) {
 			p = s.pop();
+			
 			x = (int) p.getX();
 			y = (int) p.getY();
 			canvas[x][y] = code;
