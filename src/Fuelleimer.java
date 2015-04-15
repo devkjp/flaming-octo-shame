@@ -29,22 +29,27 @@ public class Fuelleimer {
 		}
 	}
 
-	public static void iterSeedFill(GraphArea.color[][] canvas, int x, int y, GraphArea.color code) {
-		// Like recursive, but with stack :(
+	public static void iterSeedFill(GraphArea.color[][] canvas, int x, int y,
+			GraphArea.color code) {
 		Stack<Point> s = new Stack<Point>();
 		Point p;
-		if (isInCanvas(x, y, canvas)) s.push(new Point(x,y));
-		while(! s.isEmpty()){
-			p = s.pop(); x = (int) p.getX(); y = (int) p.getY();
+		if (isInCanvas(x, y, canvas))
+			s.push(new Point(x, y));
+		while (!s.isEmpty()) {
+			p = s.pop();
+			x = (int) p.getX();
+			y = (int) p.getY();
 			canvas[x][y] = code;
-			if (!isBorder(x-1,y,canvas)) s.push(new Point(x-1,y));
-			if (!isBorder(x+1,y,canvas)) s.push(new Point(x+1,y));
-			if (!isBorder(x,y-1,canvas)) s.push(new Point(x,y-1));
-			if (!isBorder(x,y+1,canvas)) s.push(new Point(x,y+1));
+			if (!isBorder(x - 1, y, canvas))
+				s.push(new Point(x - 1, y));
+			if (!isBorder(x + 1, y, canvas))
+				s.push(new Point(x + 1, y));
+			if (!isBorder(x, y - 1, canvas))
+				s.push(new Point(x, y - 1));
+			if (!isBorder(x, y + 1, canvas))
+				s.push(new Point(x, y + 1));
 		}
-		
-		
-		
+
 	}
 
 	private static boolean isBorder(int i, int j, GraphArea.color[][] canvas) {
