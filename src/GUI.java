@@ -1,64 +1,79 @@
+import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.WindowConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class GUI extends JFrame {
 
 	// Constants
 	final int marginH = 20;
-	final int marginV = 30;
+	final int marginV = 80;
+	int angle = 0;
 
-	public GUI( GraphAreaInterface gA) {
+	public GUI(final GraphAreaInterface gA,final DrawerInterface drawer) {
+		Container content = this.getContentPane();
+		final GUI guiReference = this;
+		final JPanel buttonPanel = new JPanel(new FlowLayout());
+		final JButton btnResetImage = new JButton("Reset");
+		final JSlider sldTurnAngle = new JSlider(0, 360, 0);
+		final JLabel lblTurnAngle = new JLabel("Angle: 0°");
+
+		this.setLayout(new BorderLayout());
+
+		btnResetImage.addActionListener( new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if (e.getSource() == btnResetImage){
+					gA.clear(); 
+					drawer.drawOnto(gA);
+					guiReference.repaint();
+				}
+			}
+		});
+		
+		sldTurnAngle.addChangeListener( new ChangeListener(){
+			public void stateChanged(ChangeEvent e) {
+				if (e.getSource() == sldTurnAngle){
+					lblTurnAngle.setText(String.format("Angle: %d°",sldTurnAngle.getValue() ));
+					gA.rotate(sldTurnAngle.getValue() - angle);
+					guiReference.angle = sldTurnAngle.getValue();
+					guiReference.repaint();
+				}
+			}
+		});
+
+		buttonPanel.add(btnResetImage);
+		buttonPanel.add(lblTurnAngle);
+		buttonPanel.add(sldTurnAngle);
+		content.add(buttonPanel, BorderLayout.NORTH);
+		content.add(gA, BorderLayout.CENTER);
+
 		int graphAreaWidth = gA.getWidth();
 		int graphAreaHeight = gA.getHeight();
-		
+
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		this.setBounds(0, 0, graphAreaWidth + marginH, graphAreaHeight + marginV);
-		Container content = this.getContentPane();
-		content.add(gA);
+		this.setBounds(0, 0, graphAreaWidth + buttonPanel.getWidth() + marginH,
+				graphAreaHeight + buttonPanel.getHeight() + marginV);
+		
+		// Draw onto Graph Area
+		drawer.drawOnto(gA);
+		
 		this.setVisible(true);
 	}
 
 	public static void main(String[] args) {
-		
+
 		// Pokeball
 		GraphAreaInterface gA = new GraphArea(500, 500);
-		Bresenham.drawNiceCircle(gA.getPixelArray(), 25,25,2, GraphAreaInterface.color.BLACK);
-		Fuelleimer.iterSeedFill(gA.getPixelArray(), 25, 25, GraphAreaInterface.color.BLACK);
-		Bresenham.drawNiceCircle(gA.getPixelArray(), 25,25,5, GraphAreaInterface.color.BLACK);
-		Fuelleimer.iterSeedFill(gA.getPixelArray(), 25, 22, GraphAreaInterface.color.WHITE);
-		Bresenham.drawNiceCircle(gA.getPixelArray(), 25,25,20, GraphAreaInterface.color.BLACK);
-		Bresenham.drawLine(gA.getPixelArray(), 5, 25, 20, 25, GraphAreaInterface.color.BLACK);
-		Bresenham.drawLine(gA.getPixelArray(), 30, 25, 45, 25, GraphAreaInterface.color.BLACK);
-		Fuelleimer.iterSeedFill(gA.getPixelArray(), 0, 20, GraphAreaInterface.color.GRAY);
-		Fuelleimer.iterSeedFill(gA.getPixelArray(), 6, 24, GraphAreaInterface.color.RED);
-		Fuelleimer.iterSeedFill(gA.getPixelArray(), 6, 26, GraphAreaInterface.color.WHITE);
-		GUI g = new GUI(gA);
-		
-		// Linientest, auskommentieren wenn nicht GraphAreaJ2D verwendet wird (Pixelgröße)
-//		GraphAreaInterface gA2 = new GraphAreaJ2D(500,500);
-//		Bresenham.drawNiceCircle(gA2.getPixelArray(), 250,250,249, GraphAreaInterface.color.BLACK);
-//		Bresenham.drawLine(gA2.getPixelArray(), 250,250,125,125,GraphAreaInterface.color.BLACK);
-//		Bresenham.drawLine(gA2.getPixelArray(), 250,250,250,125,GraphAreaInterface.color.BLACK);
-//		Bresenham.drawLine(gA2.getPixelArray(), 250,250,375,125,GraphAreaInterface.color.BLACK);
-//		Bresenham.drawLine(gA2.getPixelArray(), 250,250,125,250,GraphAreaInterface.color.BLACK);
-//		Bresenham.drawLine(gA2.getPixelArray(), 250,250,375,250,GraphAreaInterface.color.BLACK);
-//		Bresenham.drawLine(gA2.getPixelArray(), 250,250,125,375,GraphAreaInterface.color.BLACK);
-//		Bresenham.drawLine(gA2.getPixelArray(), 250,250,250,375,GraphAreaInterface.color.BLACK);
-//		Bresenham.drawLine(gA2.getPixelArray(), 250,250,375,375,GraphAreaInterface.color.BLACK);
-//		Bresenham.drawLine(gA2.getPixelArray(), 125,125,375,125,GraphAreaInterface.color.BLACK);
-//		Bresenham.drawLine(gA2.getPixelArray(), 125,125,125,375,GraphAreaInterface.color.BLACK);
-//		Bresenham.drawLine(gA2.getPixelArray(), 375,375,375,125,GraphAreaInterface.color.BLACK);
-//		Bresenham.drawLine(gA2.getPixelArray(), 375,375,125,375,GraphAreaInterface.color.BLACK);
-//		
-//		Fuelleimer.iterSeedFill(gA2.getPixelArray(), 126, 127, GraphAreaInterface.color.GRAY);
-//		
-//		GUI g2 = new GUI(gA2);
-		
-		
-		
-		
+		GUI g = new GUI(gA, new Pokeball());
 	}
-
 }
