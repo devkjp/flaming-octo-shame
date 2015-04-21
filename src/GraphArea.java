@@ -12,6 +12,7 @@ public class GraphArea extends GraphAreaInterface {
 
 	@Override
 	public void paintComponent(Graphics g) {
+		color[][] imgPixel = transformationHandler.getTransformedCanvas(pixel);
 		Graphics2D g2D = (Graphics2D) g;
 		g2D.setPaint(Color.black);
 		for (int j = 0; j < graphAreaWidth; j = j + pixelWidth) {
@@ -19,7 +20,7 @@ public class GraphArea extends GraphAreaInterface {
 			for (int i = 0; i < graphAreaHeight; i = i + pixelWidth) {
 				g2D.drawRect(j, i, pixelWidth, pixelWidth);
 				if (pixel[j/pixelWidth][i/pixelWidth] != color.BLANK) {
-					g2D.setColor( this.getColorFromCode(pixel[j/pixelWidth][i/pixelWidth]));
+					g2D.setColor( this.getColorFromCode(imgPixel[j/pixelWidth][i/pixelWidth]));
 					g2D.fillRect(j, i, pixelWidth, pixelWidth);
 					g2D.setColor(Color.BLACK);
 				}

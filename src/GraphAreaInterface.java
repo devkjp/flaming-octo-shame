@@ -13,7 +13,8 @@ public abstract class GraphAreaInterface extends JPanel {
 	protected final int graphAreaWidth;
 	protected final int graphAreaHeight;
 	
-	protected final TransformationHandler t = new TransformationHandler(0,0);
+	protected int angle;
+	protected final TransformationHandler transformationHandler = new TransformationHandler(0,0);
 	
 	protected final int pixelWidth;
 	protected color[][] pixel;
@@ -34,10 +35,9 @@ public abstract class GraphAreaInterface extends JPanel {
 		
 		super.addMouseListener( new MouseListener(){
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("Clicked");
 				int canvasX = e.getX() / pixelWidth;
 				int canvasY = e.getY() / pixelWidth;
-				me.t.setTransformationBasePoint(canvasX, canvasY);
+				me.transformationHandler.setTransformationBasePoint(canvasX, canvasY);
 				for (int i=-2; i<3; i++){
 					for (int j=-2; j<3; j++){
 						if (0<=canvasX+i && canvasX+i < pixel[0].length && 0<=canvasY+j && canvasY+j<pixel.length)
@@ -55,7 +55,15 @@ public abstract class GraphAreaInterface extends JPanel {
 	}
 	
 	public void rotate(int angle){
-		pixel = t.turnCanvasByAngle(pixel, angle);
+		transformationHandler.setAngle(angle);
+	}
+	
+	public void scale(double x, double y){
+		transformationHandler.setScale(x, y);
+	}
+	
+	public void translate(int x, int y){
+		transformationHandler.setTranslation(x,y);
 	}
 	
 	public void clear(){
@@ -65,6 +73,7 @@ public abstract class GraphAreaInterface extends JPanel {
 				pixel[i][j] = color.BLANK;
 			}
 		}
+		transformationHandler.setTransformationBasePoint(0, 0);
 	}
 	
 	
