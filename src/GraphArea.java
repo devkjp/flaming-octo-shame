@@ -6,8 +6,8 @@ import javax.swing.JPanel;
 
 public class GraphArea extends GraphAreaInterface {
 
-	public GraphArea(int gaWidth, int gaHeight) {
-		super(gaWidth, gaHeight, 1);
+	public GraphArea(int gaWidth, int gaHeight, DrawerInterface image) {
+		super(gaWidth, gaHeight, 10, image);
 	}
 
 	@Override

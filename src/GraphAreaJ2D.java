@@ -5,8 +5,8 @@ import java.awt.Graphics2D;
 
 public class GraphAreaJ2D extends GraphAreaInterface {
 
-	public GraphAreaJ2D(int gaWidth, int gaHeight) {
-		super(gaWidth, gaHeight, 1);
+	public GraphAreaJ2D(int gaWidth, int gaHeight, DrawerInterface image) {
+		super(gaWidth, gaHeight, 1, image);
 	}
 
 	@Override

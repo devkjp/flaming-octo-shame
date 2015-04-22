@@ -14,14 +14,17 @@ public abstract class GraphAreaInterface extends JPanel {
 	protected final int graphAreaHeight;
 	
 	protected int angle;
-	protected final TransformationHandler transformationHandler = new TransformationHandler(0,0);
+	protected final TransformationHandler transformationHandler = new TransformationHandler();
+	
+	protected final DrawerInterface image;
 	
 	protected final int pixelWidth;
 	protected color[][] pixel;
 	
-	public GraphAreaInterface(int gaWidth, int gaHeight, int pixelSize) {
+	public GraphAreaInterface(int gaWidth, int gaHeight, int pixelSize, DrawerInterface image) {
 		final GraphAreaInterface me = this;
 		
+		this.image = image;
 		this.graphAreaWidth = gaWidth;
 		this.graphAreaHeight = gaHeight;
 		
@@ -31,27 +34,12 @@ public abstract class GraphAreaInterface extends JPanel {
 		
 		pixel = new color[gaWidth / pixelWidth][gaHeight / pixelWidth];
 		
-		this.clear();
+		this.reset();
 		
-		super.addMouseListener( new MouseListener(){
-			public void mouseClicked(MouseEvent e) {
-				int canvasX = e.getX() / pixelWidth;
-				int canvasY = e.getY() / pixelWidth;
-				me.transformationHandler.setTransformationBasePoint(canvasX, canvasY);
-				for (int i=-2; i<3; i++){
-					for (int j=-2; j<3; j++){
-						if (0<=canvasX+i && canvasX+i < pixel[0].length && 0<=canvasY+j && canvasY+j<pixel.length)
-						pixel[canvasX+i][canvasY+j] = color.TURN;
-					}
-				}
-				me.repaint();
-			}
-			public void mouseEntered(MouseEvent e) {}
-			public void mouseExited(MouseEvent e) {}
-			public void mousePressed(MouseEvent e) {}
-			public void mouseReleased(MouseEvent e) {}
-		});
-
+	}
+	
+	public TransformationHandler getTransformationHandler(){
+		return transformationHandler;
 	}
 	
 	public void rotate(int angle){
@@ -66,14 +54,18 @@ public abstract class GraphAreaInterface extends JPanel {
 		transformationHandler.setTranslation(x,y);
 	}
 	
-	public void clear(){
+	public void reset(){
 		for (int i=0; i < pixel.length; i++){
 			pixel[i] = new color[graphAreaHeight/pixelWidth];
 			for (int j=0; j<pixel[i].length; j++){
 				pixel[i][j] = color.BLANK;
 			}
 		}
+		
 		transformationHandler.setTransformationBasePoint(0, 0);
+		transformationHandler.initMatrices();
+		
+		image.drawOnto(this);
 	}
 	
 	
@@ -84,6 +76,17 @@ public abstract class GraphAreaInterface extends JPanel {
 	
 	public void setPixelArray(color[][] pixel){
 		this.pixel = pixel;
+	}
+	
+	public void setTransformationBasePoint(int canvasX, int canvasY){
+		reset();
+		transformationHandler.setTransformationBasePoint(canvasX, canvasY);
+		for (int i=-2; i<3; i++){
+			for (int j=-2; j<3; j++){
+				if (0<=canvasX+i && canvasX+i < pixel[0].length && 0<=canvasY+j && canvasY+j<pixel.length)
+				pixel[canvasX+i][canvasY+j] = color.TURN;
+			}
+		}
 	}
 
 	
@@ -99,5 +102,9 @@ public abstract class GraphAreaInterface extends JPanel {
 	}
 
 	public abstract void paintComponent(Graphics g);
+
+	public int getPixelWidth() {
+		return pixelWidth;
+	}
 
 }
