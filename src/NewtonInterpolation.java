@@ -16,10 +16,20 @@ public class NewtonInterpolation implements DrawerInterface {
 		grade = this.basePoints.length;
 		coefficients = new Matrix(grade+1, 1);
 		
+		doInterpolation();
+		
+	}
+
+	private void doInterpolation() {
+		/***
+		 * TODO: Newton Interpolationsverfahren der dividierten Differenzen
+		 * - Koeffizienten in die Matrix coefficients schreiben ((0|0) ist die höchste Potenz)
+		 * - Ergebnisse zwischenspeichern
+		 * - Schleife löschen, die ist nur platzhalter
+		 */
 		for(int i=0; i<=coefficients.getRowDimension()-1;i++){
 			coefficients.set(i,0,1.0);
 		}
-		
 	}
 	
 	private double f(double x){
