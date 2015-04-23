@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -166,7 +167,8 @@ public class GUI extends JFrame {
 
 	public static void main(String[] args) {
 
-		// Pokeball
+		// Point Array
+		Point[] points = {new Point(5,40), new Point(15,20), new Point(25,40), new Point(35, 17), new Point(45,30)};
 		GraphAreaInterface gA = new GraphArea(500, 500, new Pokeball());
 		GUI g = new GUI(gA);
 	}

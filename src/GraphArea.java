@@ -19,7 +19,7 @@ public class GraphArea extends GraphAreaInterface {
 			g2D.drawRect(j, 10, pixelWidth, pixelWidth);
 			for (int i = 0; i < graphAreaHeight; i = i + pixelWidth) {
 				g2D.drawRect(j, i, pixelWidth, pixelWidth);
-				if (pixel[j/pixelWidth][i/pixelWidth] != color.BLANK) {
+				if (imgPixel[j/pixelWidth][i/pixelWidth] != color.BLANK) {
 					g2D.setColor( this.getColorFromCode(imgPixel[j/pixelWidth][i/pixelWidth]));
 					g2D.fillRect(j, i, pixelWidth, pixelWidth);
 					g2D.setColor(Color.BLACK);

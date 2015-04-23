@@ -21,20 +21,19 @@ public class TransformationHandler {
 			return desc;
 		}
 	};
-	
 
-	private Transformation[] transformations = { Transformation.ROTATE, Transformation.TRANSLATE,
-			Transformation.SCALE };
+	private Transformation[] transformations = { Transformation.ROTATE,
+			Transformation.TRANSLATE, Transformation.SCALE };
 
 	public TransformationHandler() {
 		initMatrices();
 	}
-	
-	public Transformation[] getTransformationArray(){
+
+	public Transformation[] getTransformationArray() {
 		return transformations;
 	}
-	
-	public void setTransformationArray(Transformation[] transformations){
+
+	public void setTransformationArray(Transformation[] transformations) {
 		this.transformations = transformations;
 	}
 
@@ -47,7 +46,7 @@ public class TransformationHandler {
 		case TRANSLATE:
 			return transMat;
 		default:
-			double[][] ones = {{1,0,0},{0,1,0},{0,0,1}};
+			double[][] ones = { { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 1 } };
 			return new Matrix(ones);
 		}
 	}
@@ -78,8 +77,6 @@ public class TransformationHandler {
 	public void setTransformationBasePoint(int x, int y) {
 		this.turnBaseX = x;
 		this.turnBaseY = y;
-		this.transMat.set(0, 2, this.transMat.get(0, 2) + x);
-		this.transMat.set(1, 2, this.transMat.get(1, 2) + y);
 	}
 
 	public void setScale(double sX, double sY) {
@@ -115,14 +112,15 @@ public class TransformationHandler {
 					resultVector = transformation.times(vector);
 					newX = (int) resultVector.get(0, 0);
 					newY = (int) resultVector.get(1, 0);
+					int oldX = (int) x;
+					int oldY = (int) y;
 
 					if (0 <= newX && newX < resultCanvas[0].length && 0 <= newY
 							&& newY < resultCanvas.length) {
-						resultCanvas[newX][newY] = canvas[(int) x][(int) y];
+						resultCanvas[newX][newY] = canvas[oldX][oldY];
 					}
 				}
 			}
-
 			return resultCanvas;
 		} else {
 			return canvas;
@@ -133,14 +131,13 @@ public class TransformationHandler {
 		double cosA = Math.cos(Math.toRadians(angle));
 		double sinA = Math.sin(Math.toRadians(angle));
 
-		double[][] rotationArr = { { cosA, -sinA, 0 }, { sinA, cosA, 0 },
-				{ 0, 0, 1 } };
+		double[][] rotationArr = { { cosA, -sinA, turnBaseX },
+				{ sinA, cosA, turnBaseY }, { 0, 0, 1 } };
 		rotationMat = new Matrix(rotationArr);
 	}
 
 	public void setTranslation(int x, int y) {
-		double[][] transArr = { { 1, 0, x + this.turnBaseX },
-				{ 0, 1, y + this.turnBaseY }, { 0, 0, 1 } };
+		double[][] transArr = { { 1, 0, x }, { 0, 1, y }, { 0, 0, 1 } };
 		transMat = new Matrix(transArr);
 	}
 

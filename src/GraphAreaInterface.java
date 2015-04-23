@@ -22,8 +22,6 @@ public abstract class GraphAreaInterface extends JPanel {
 	protected color[][] pixel;
 	
 	public GraphAreaInterface(int gaWidth, int gaHeight, int pixelSize, DrawerInterface image) {
-		final GraphAreaInterface me = this;
-		
 		this.image = image;
 		this.graphAreaWidth = gaWidth;
 		this.graphAreaHeight = gaHeight;
@@ -68,8 +66,6 @@ public abstract class GraphAreaInterface extends JPanel {
 		image.drawOnto(this);
 	}
 	
-	
-	
 	public color[][] getPixelArray(){
 		return pixel;
 	};
@@ -81,14 +77,15 @@ public abstract class GraphAreaInterface extends JPanel {
 	public void setTransformationBasePoint(int canvasX, int canvasY){
 		reset();
 		transformationHandler.setTransformationBasePoint(canvasX, canvasY);
-		for (int i=-2; i<3; i++){
-			for (int j=-2; j<3; j++){
+		for (int i=-1; i<1; i++){
+			for (int j=-1; j<1; j++){
 				if (0<=canvasX+i && canvasX+i < pixel[0].length && 0<=canvasY+j && canvasY+j<pixel.length)
 				pixel[canvasX+i][canvasY+j] = color.TURN;
 			}
 		}
+		rotate(0);
+		repaint();
 	}
-
 	
 	protected Color getColorFromCode( color code ){
 		switch(code){
@@ -97,7 +94,7 @@ public abstract class GraphAreaInterface extends JPanel {
 		case WHITE: return Color.WHITE;
 		case GRAY: return Color.GRAY;
 		case TURN: return Color.BLUE;
-		default: return Color.BLACK;
+		default: return Color.GREEN;
 		}
 	}
 
