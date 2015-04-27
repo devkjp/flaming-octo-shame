@@ -77,8 +77,9 @@ public abstract class GraphAreaInterface extends JPanel {
 	public void setTransformationBasePoint(int canvasX, int canvasY){
 		reset();
 		transformationHandler.setTransformationBasePoint(canvasX, canvasY);
-		for (int i=-1; i<1; i++){
-			for (int j=-1; j<1; j++){
+		for (int i=0; i<1; i++){
+			for (int j=0; j<1; j++){
+				System.out.printf("X: %d - Y: %d \n", canvasX, canvasY);
 				if (0<=canvasX+i && canvasX+i < pixel[0].length && 0<=canvasY+j && canvasY+j<pixel.length)
 				pixel[canvasX+i][canvasY+j] = color.TURN;
 			}
