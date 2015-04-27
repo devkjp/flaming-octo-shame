@@ -168,7 +168,7 @@ public class GUI extends JFrame {
 	public static void main(String[] args) {
 
 		// Point Array
-		Point[] points = {new Point(1,1), new Point(5,25)};
+		Point[] points = {new Point(1,1), new Point(5,25), new Point(9,81)};
 		GraphAreaInterface gA = new GraphArea(500, 500, new NewtonInterpolation(points));
 		GUI g = new GUI(gA);
 	}
