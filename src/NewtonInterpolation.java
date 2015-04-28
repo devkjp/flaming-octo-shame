@@ -30,7 +30,7 @@ public class NewtonInterpolation implements DrawerInterface {
 				double cI   = coefficients.get(i, 0);
 				double cIm1 = coefficients.get(i-1,0);
 				double xI   = basePoints[i].getX();
-				double xIm1 = basePoints[i-1].getX();
+				double xIm1 = basePoints[i-k].getX();
 				
 				// Compute new coefficient at place i
 				double quot = (cI - cIm1) / (xI - xIm1);
@@ -47,7 +47,7 @@ public class NewtonInterpolation implements DrawerInterface {
 	 * Purpose: Bestimmen des Wertes des Interpolationspolynoms an der Stelle x
 	 ***/
 	private double p(double x) {
-		double p = coefficients.get(coefficients.getRowDimension()-1, 0) / 2;
+		double p = coefficients.get(coefficients.getRowDimension()-1, 0);
 		int j = basePoints.length-1;
 		for (int i = coefficients.getRowDimension()-2; i>=0; i--) {
 			double cK = coefficients.get(i, 0);
