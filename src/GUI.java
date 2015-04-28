@@ -34,7 +34,7 @@ public class GUI extends JFrame {
 		final JPanel rankingPanel = new JPanel(new FlowLayout());
 		final JButton btnResetImage = new JButton("Reset");
 		final JSlider sldTurnAngle = new JSlider(0, 360, 0);
-		final JLabel lblTurnAngle = new JLabel("Angle: 0°");
+		final JLabel lblTurnAngle = new JLabel("Angle: 0ï¿½");
 		final JSlider sldScaleX = new JSlider(0,20,10);
 		final JSlider sldScaleY = new JSlider(0,20,10);
 		final JLabel lblScale = new JLabel("Scale: X 1.0 Y 1.0");
@@ -56,7 +56,7 @@ public class GUI extends JFrame {
 		btnResetImage.addActionListener( new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 					gA.reset(); 
-					lblTurnAngle.setText("Angle: 0°");
+					lblTurnAngle.setText("Angle: 0ï¿½");
 					sldTurnAngle.setValue(0);
 					sldScaleX.setValue(10);
 					sldScaleY.setValue(10);
@@ -72,7 +72,7 @@ public class GUI extends JFrame {
 		sldTurnAngle.addChangeListener( new ChangeListener(){
 			public void stateChanged(ChangeEvent e) {
 				if (e.getSource() == sldTurnAngle){
-					lblTurnAngle.setText(String.format("Angle: %d°",sldTurnAngle.getValue() ));
+					lblTurnAngle.setText(String.format("Angle: %dï¿½",sldTurnAngle.getValue() ));
 					gA.rotate(sldTurnAngle.getValue());
 					guiReference.repaint();
 				}
@@ -168,7 +168,7 @@ public class GUI extends JFrame {
 	public static void main(String[] args) {
 
 		// Point Array
-		Point[] points = {new Point(1,1), new Point(2,4), new Point(4,16)};
+		Point[] points = {new Point(1,1), new Point(5,25), new Point(9,81)};
 		GraphAreaInterface gA = new GraphArea(500, 500, new NewtonInterpolation(points));
 		GUI g = new GUI(gA);
 	}

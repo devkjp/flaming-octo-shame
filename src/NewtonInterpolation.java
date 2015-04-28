@@ -1,7 +1,5 @@
 import java.awt.Point;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import Jama.Matrix;
 
@@ -23,6 +21,7 @@ public class NewtonInterpolation implements DrawerInterface {
 		// Set initial coefficients
 		for (int i=0; i<coefficients.getRowDimension(); i++){
 			coefficients.set(i, 0, basePoints[i].getY());
+			System.out.printf("C%d = %f\n",i, coefficients.get(i, 0) );
 		}
 		// Replace initial coefficients with new computation
 		for (int k=1; k<coefficients.getRowDimension(); k++){
@@ -37,31 +36,36 @@ public class NewtonInterpolation implements DrawerInterface {
 				double quot = (cI - cIm1) / (xI - xIm1);
 				coefficients.set(i, 0, quot);
 			}
+			System.out.println("-------------------------\nRECOMPUTED COEEFICIENTS\n-------------------------");
+			for (int i=0; i<coefficients.getRowDimension(); i++){
+				System.out.printf("C%d = %f\n",i, coefficients.get(i, 0));
+			}
 		}
 	}
-
+	
 	/***
 	 * Purpose: Bestimmen des Wertes des Interpolationspolynoms an der Stelle x
 	 ***/
 	private double p(double x) {
-		double p = coefficients.get(coefficients.getRowDimension()-1, 0);
-		for (int i = coefficients.getRowDimension()-2; i >= 0; i--) {
+		double p = coefficients.get(coefficients.getRowDimension()-1, 0) / 2;
+		int j = basePoints.length-1;
+		for (int i = coefficients.getRowDimension()-2; i>=0; i--) {
 			double cK = coefficients.get(i, 0);
-			p = cK + (x - basePoints[i].getX()) * p;
+			p = cK + (x - basePoints[--j].getX()) * p;
 		}
 		return p;
 	}
 	
 	/***
 	 * Zeichnen der Interpolierten Funktion
-	 */
+	 ***/
 	@Override
 	public void drawOnto(GraphAreaInterface gA) {
 		GraphAreaInterface.color[][] canvas = gA.getPixelArray();
 		// Draw Function Points
 		// Set initial x|y
 		int lineStartX = (int) (basePoints[0].getX() / lenX);
-		int lineStartY = (int) basePoints[0].getY();
+		int lineStartY = (int) Math.round(p(lineStartX*lenX));
 		
 		// Iterate over all x from first to last basepoint
 		for (int x = lineStartX + 1; x <= basePoints[basePoints.length - 1].getX()/lenX; x++) {
