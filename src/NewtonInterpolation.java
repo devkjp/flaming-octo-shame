@@ -7,7 +7,7 @@ public class NewtonInterpolation implements DrawerInterface {
 
 	private Point[] basePoints;
 	private Matrix coefficients;
-	double lenX = 0.1;
+	double lenX = 1;
 	
 	public NewtonInterpolation(Point[] basePoints) {
 		this.basePoints = basePoints;
@@ -21,7 +21,6 @@ public class NewtonInterpolation implements DrawerInterface {
 		// Set initial coefficients
 		for (int i=0; i<coefficients.getRowDimension(); i++){
 			coefficients.set(i, 0, basePoints[i].getY());
-			System.out.printf("C%d = %f\n",i, coefficients.get(i, 0) );
 		}
 		// Replace initial coefficients with new computation
 		for (int k=1; k<coefficients.getRowDimension(); k++){
@@ -35,10 +34,6 @@ public class NewtonInterpolation implements DrawerInterface {
 				// Compute new coefficient at place i
 				double quot = (cI - cIm1) / (xI - xIm1);
 				coefficients.set(i, 0, quot);
-			}
-			System.out.println("-------------------------\nRECOMPUTED COEEFICIENTS\n-------------------------");
-			for (int i=0; i<coefficients.getRowDimension(); i++){
-				System.out.printf("C%d = %f\n",i, coefficients.get(i, 0));
 			}
 		}
 	}
