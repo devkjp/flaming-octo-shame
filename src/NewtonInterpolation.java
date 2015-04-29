@@ -1,5 +1,4 @@
 import java.awt.Point;
-import java.util.Iterator;
 
 import Jama.Matrix;
 
@@ -7,7 +6,8 @@ public class NewtonInterpolation implements DrawerInterface {
 
 	private Point[] basePoints;
 	private Matrix coefficients;
-	double lenX = 1;
+	private final double lenX = 1;
+	private final int dX = 1;
 	
 	public NewtonInterpolation(Point[] basePoints) {
 		this.basePoints = basePoints;
@@ -43,10 +43,9 @@ public class NewtonInterpolation implements DrawerInterface {
 	 ***/
 	private double p(double x) {
 		double p = coefficients.get(coefficients.getRowDimension()-1, 0);
-		int j = basePoints.length-1;
 		for (int i = coefficients.getRowDimension()-2; i>=0; i--) {
 			double cK = coefficients.get(i, 0);
-			p = cK + (x - basePoints[--j].getX()) * p;
+			p = cK + (x - basePoints[i].getX()) * p;
 		}
 		return p;
 	}
@@ -62,13 +61,21 @@ public class NewtonInterpolation implements DrawerInterface {
 		int lineStartX = (int) (basePoints[0].getX() / lenX);
 		int lineStartY = (int) Math.round(p(lineStartX*lenX));
 		
+		int maxX = (int) basePoints[basePoints.length-1].getX();
+		
 		// Iterate over all x from first to last basepoint
-		for (int x = lineStartX + 1; x <= basePoints[basePoints.length - 1].getX()/lenX; x++) {
+		for (int x = lineStartX + dX; x <= (basePoints[basePoints.length - 1].getX())/lenX; x++){
+			x+=dX-1;
+			x = x > maxX ? maxX : x;
+
 			// Compute y value to current x
 			int y = (int) Math.round(p(x*lenX));
 			
+			
 			// Draw line from last x|y to new x|y 
 			Bresenham.drawLine(canvas, lineStartX, lineStartY, x, y, GraphAreaInterface.color.GRAY);
+			
+			if (x>=maxX)break;
 			
 			// Update last x|y
 			lineStartX = x;
