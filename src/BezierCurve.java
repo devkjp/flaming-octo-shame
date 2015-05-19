@@ -30,9 +30,12 @@ public class BezierCurve implements DrawerInterface {
 			q[i].set(1,0, points[i].getY());
 		}
 		
-		// Apply de Casteljau Algorithm
+		// Apply de Casteljau Algorithm:
+		// Iterate over working array until only one value is left after computation
 		for (int i=1; i<=q.length; i++){
+			// Iterate over working array from 0 to i
 			for (int j=0; j<q.length-i; j++){
+				// interpolate new point q[j] based on old q[j] and q[j+1] 
 				q[j] = q[j].times(1-u).plus(q[j+1].times(u));
 			}
 		}
@@ -51,13 +54,18 @@ public class BezierCurve implements DrawerInterface {
 		
 		// Draw Bezier Curve
 		Point start = points[0];
+		// Iterate curve parameter u from 0 to 1 with stepwidth dU
 		for (double u=0+dU; u<=1; u+=dU){
+			// Get point for curve parameter u
 			Point end = p(u);
+			
+			// Round point X and Y to int values
 			int startX = (int) Math.round(start.getX());
 			int startY = (int) Math.round(start.getY());
 			int endX = (int) Math.round(end.getX());
 			int endY = (int) Math.round(end.getY());
 			
+			// Draw line from last point to new point
 			Bresenham.drawLine(canvas, startX, startY, endX, endY, GraphAreaInterface.color.BLACK);
 			start = end;
 		}
