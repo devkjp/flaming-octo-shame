@@ -30,12 +30,9 @@ public class Main {
 		double[] knotenvektorU = new double[] { 0, 0, 6, 6 };
 		double[] knotenvektorV = new double[] { 0, 0, 6, 6 };
 		Point3d[][] kontrollpunktMatrix = new Point3d[][] {
-				{ new Point3d(0, 0, 0), new Point3d(1, 1, 0),
-						new Point3d(2, 0, 0) },
-				{ new Point3d(0, 1, 1), new Point3d(1, 2, 1),
-						new Point3d(2, 1, 1) },
-				{ new Point3d(0, 0, 2), new Point3d(1, 1, 2),
-						new Point3d(2, 0, 2) } };
+				{ new Point3d(0, 0, 0), new Point3d(1, 0, 0), new Point3d(2, 0, 0) },
+				{ new Point3d(0, 0, 1), new Point3d(1, 1, 1), new Point3d(2, 0, 1) },
+				{ new Point3d(0, 0, 2), new Point3d(1, 0, 2), new Point3d(2, 0, 2) } };
 		BSplinePatch patch = new BSplinePatch(gradU, gradV, knotenvektorU,
 				knotenvektorV, 3, 3, kontrollpunktMatrix);
 
