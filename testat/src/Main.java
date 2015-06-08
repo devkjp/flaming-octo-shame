@@ -84,9 +84,9 @@ public class Main {
 		// Visualisierung definieren
 
 		Group[] g = new Group[] {
-				bSplineFlaecheXY.kontrollPolygon(3, 3, kontrollpunkteFlaecheXY),
-				bSplineFlaecheXY.kontrollPunkte(0.05f, 3, 3,	kontrollpunkteFlaecheXY, new Color3f(1f, 1f, 1f)),
-				bSplineFlaecheXY.segmentierteFlaeche(bSplineFlaecheXY.umin(), bSplineFlaecheXY.vmin(),bSplineFlaecheXY.umax(), bSplineFlaecheXY.vmax(), 20, 20, new Color3f(1f, 0f,	0f)), 
+				bSplineFlaecheXZ.kontrollPolygon(3, 3, kontrollpunkteFlaecheXZ),
+				bSplineFlaecheXZ.kontrollPunkte(0.05f, 3, 3,	kontrollpunkteFlaecheXZ, new Color3f(1f, 1f, 1f)),
+				bSplineFlaecheXZ.segmentierteFlaeche(bSplineFlaecheXZ.umin(), bSplineFlaecheXZ.vmin(),bSplineFlaecheXZ.umax(), bSplineFlaecheXZ.vmax(), 20, 20, new Color3f(1f, 0f,	0f)), 
 				
 				bSplineFlaecheXY.kontrollPolygon(3, 3, kontrollpunkteFlaecheXY),
 				bSplineFlaecheXY.kontrollPunkte(0.05f, 3, 3,	kontrollpunkteFlaecheXY, new Color3f(1f, 1f, 1f)),
