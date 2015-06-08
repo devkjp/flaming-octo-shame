@@ -29,50 +29,77 @@ public class Main {
 		int gradV = 2;
 		double[] knotenvektorU = new double[] { 0, 0, 6, 6 };
 		double[] knotenvektorV = new double[] { 0, 0, 6, 6 };
+		
+		double[] knotenvektorU2 = new double[] { 0, 0,  6, 6 };
+		double[] knotenvektorV2 = new double[] { 0, 0, 6, 6 };
+		
+		// Radius zur Verschiebung
+		double r = 1.0;
+		double le = 1.0; // Laengeneinheit
+		
+		
+		
+		Point3d[][] kontrollpunkteFlaecheXZ = new Point3d[][] {
+				{ new Point3d(r, 0, r), 		 new Point3d(r + 1*le, 0, r), 	     new Point3d(r + 2*le, 0, r) },
+				{ new Point3d(r, 0, r + 1 * le), new Point3d(r + 1*le, 0, r + 1*le), new Point3d(r + 2*le, 0, r + 1*le) },
+				{ new Point3d(r, 0, r + 2 * le), new Point3d(r + 1*le, 0, r + 2*le), new Point3d(r + 2*le, 0, r + 2*le) } };
 
-		Point3d[][] kontrollpunktMatrix = new Point3d[][] {
-				{ new Point3d(0, 0, 0), new Point3d(1, 1, 0), new Point3d(2, 0, 0) },
-				{ new Point3d(0, 0.5, 1), new Point3d(1, 2, 1),	new Point3d(2, 0.5, 1) },
-				{ new Point3d(0, 0, 2), new Point3d(1, 1, 2), new Point3d(2, 0, 2) } };
-
-		// Flaeche auf Y- Achse
+		BSplinePatch bSplineFlaecheXZ = new BSplinePatch(gradU, gradV,
+				knotenvektorU, knotenvektorV, 3, 3, kontrollpunkteFlaecheXZ);
+		
+		// 
 		Point3d[][] kontrollpunkteFlaecheY = new Point3d[][] {
-				{ new Point3d(0, 0, 0), new Point3d(1, 0, 0), new Point3d(2, 0, 0) },
-				{ new Point3d(0, 0, 1), new Point3d(1, 0, 1), new Point3d(2, 0, 1) },
-				{ new Point3d(0, 0, 2), new Point3d(1, 0, 2), new Point3d(2, 0, 2) } };
+				{ new Point3d(r, 0, r), 		 new Point3d(r + 1*le, 0, r), 	     new Point3d(r + 2*le, 0, r) },
+				{ new Point3d(r, 0, r + 1 * le), new Point3d(r + 1*le, 0, r + 1*le), new Point3d(r + 2*le, 0, r + 1*le) },
+				{ new Point3d(r, 0, r + 2 * le), new Point3d(r + 1*le, 0, r + 2*le), new Point3d(r + 2*le, 0, r + 2*le) } };
 
 		BSplinePatch bSplineFlaecheY = new BSplinePatch(gradU, gradV,
-				knotenvektorU, knotenvektorV, 3, 3, kontrollpunkteFlaecheY);
+				knotenvektorU, knotenvektorV, 3, 3, kontrollpunkteFlaecheXZ);
 
 		// Flaeche auf Y- Achse
-		Point3d[][] kontrollpunkteFlaecheX = new Point3d[][] {
-				{ new Point3d(0, 0, 0), new Point3d(0, 1, 0), new Point3d(0, 2, 0) },
-				{ new Point3d(0, 0, 1), new Point3d(0, 1, 1), new Point3d(0, 2, 1) },
-				{ new Point3d(0, 0, 2), new Point3d(0, 1, 2), new Point3d(0, 2, 2) } };
+		Point3d[][] kontrollpunkteFlaecheXY = new Point3d[][] {
+				{ new Point3d(0, r, r), 	   new Point3d(0, r + 1*le, r),        new Point3d(0, r + 2*le, r) },
+				{ new Point3d(0, r, r + 1*le), new Point3d(0, r + 1*le, r + 1*le), new Point3d(0, r + 2*le, r + 1*le) },
+				{ new Point3d(0, r, r + 2*le), new Point3d(0, r + 1*le, r + 2*le), new Point3d(0, r + 2*le, r + 2*le) } };
 
-		BSplinePatch bSplineFlaecheX = new BSplinePatch(gradU, gradV, knotenvektorU, knotenvektorV, 3, 3, kontrollpunkteFlaecheX);
+		BSplinePatch bSplineFlaecheXY = new BSplinePatch(gradU, gradV, knotenvektorU, knotenvektorV, 3, 3, kontrollpunkteFlaecheXY);
 		
 		// Flaeche auf Z- Achse
-		Point3d[][] kontrollpunkteFlaecheZ = new Point3d[][] {
-				{ new Point3d(0, 0, 0), new Point3d(0, 1, 0), new Point3d(0, 2, 0) },
-				{ new Point3d(1, 0, 0), new Point3d(1, 1, 0), new Point3d(1, 2, 0) },
-				{ new Point3d(2, 0, 0), new Point3d(2, 1, 0), new Point3d(2, 2, 0) } };
+		Point3d[][] kontrollpunkteFlaecheYZ = new Point3d[][] {
+				{ new Point3d(r, r, 0),        new Point3d(r, r + 1*le, 0),        new Point3d(r, r + 2*le, 0) },
+				{ new Point3d(r + 1*le, r, 0), new Point3d(r + 1*le, r + 1*le, 0), new Point3d(r + 1*le, r + 2*le, 0) },
+				{ new Point3d(r + 2*le, r, 0), new Point3d(r + 2*le, r + 1*le, 0), new Point3d(r + 2*le, r + 2*le, 0) } };
 
-		BSplinePatch bSplineFlaecheZ = new BSplinePatch(gradU, gradV, knotenvektorU, knotenvektorV, 3, 3, kontrollpunkteFlaecheZ);
+		BSplinePatch bSplineFlaecheYZ = new BSplinePatch(gradU, gradV, knotenvektorU, knotenvektorV, 3, 3, kontrollpunkteFlaecheYZ);
 		
+		// Dreick ( eigentliche Ecke )
+		Point3d[][] kontrollpunkteFlaecheDreieck = new Point3d[][] {
+				{ new Point3d(r, r, 0), new Point3d(r/2, 0, 0), new Point3d(r, 0, r)},
+				{ new Point3d(0, r/2, 0), new Point3d(0, 0, 0), new Point3d(0, 0 , r/2)},
+				{ new Point3d(0, r, r), new Point3d(0, r, r), new Point3d(0, r, r)}
+		};
 		
+		BSplinePatch bSplineFlaecheDreieck = new BSplinePatch(2, 2, knotenvektorU2, knotenvektorV2, 3, 3, kontrollpunkteFlaecheDreieck);
 		
 		// Visualisierung definieren
 
 		Group[] g = new Group[] {
-				bSplineFlaecheX.kontrollPolygon(3, 3, kontrollpunkteFlaecheX),
-				bSplineFlaecheX.kontrollPunkte(0.05f, 3, 3,	kontrollpunkteFlaecheX, new Color3f(0f, 1f, 0f)),bSplineFlaecheX.segmentierteFlaeche(bSplineFlaecheX.umin(), bSplineFlaecheX.vmin(),bSplineFlaecheX.umax(), bSplineFlaecheX.vmax(), 20, 20, new Color3f(1f, 1f,	0f)), 
+				bSplineFlaecheXY.kontrollPolygon(3, 3, kontrollpunkteFlaecheXY),
+				bSplineFlaecheXY.kontrollPunkte(0.05f, 3, 3,	kontrollpunkteFlaecheXY, new Color3f(1f, 1f, 1f)),
+				bSplineFlaecheXY.segmentierteFlaeche(bSplineFlaecheXY.umin(), bSplineFlaecheXY.vmin(),bSplineFlaecheXY.umax(), bSplineFlaecheXY.vmax(), 20, 20, new Color3f(1f, 0f,	0f)), 
 				
-				bSplineFlaecheY.kontrollPolygon(3, 3, kontrollpunkteFlaecheY),
-				bSplineFlaecheY.kontrollPunkte(0.05f, 3, 3,	kontrollpunkteFlaecheY, new Color3f(1f, 0f, 0f)),bSplineFlaecheY.segmentierteFlaeche(bSplineFlaecheY.umin(), bSplineFlaecheY.vmin(),bSplineFlaecheY.umax(), bSplineFlaecheY.vmax(), 20, 20, new Color3f(1f, 0f,	1f)),
+				bSplineFlaecheXY.kontrollPolygon(3, 3, kontrollpunkteFlaecheXY),
+				bSplineFlaecheXY.kontrollPunkte(0.05f, 3, 3,	kontrollpunkteFlaecheXY, new Color3f(1f, 1f, 1f)),
+				bSplineFlaecheXY.segmentierteFlaeche(bSplineFlaecheXY.umin(), bSplineFlaecheXY.vmin(),bSplineFlaecheXY.umax(), bSplineFlaecheXY.vmax(), 20, 20, new Color3f(0f, 0f,	1f)),
 
-				bSplineFlaecheZ.kontrollPolygon(3, 3, kontrollpunkteFlaecheZ),
-				bSplineFlaecheZ.kontrollPunkte(0.05f, 3, 3,	kontrollpunkteFlaecheZ, new Color3f(0f, 0f, 1f)),bSplineFlaecheZ.segmentierteFlaeche(bSplineFlaecheZ.umin(), bSplineFlaecheZ.vmin(),bSplineFlaecheZ.umax(), bSplineFlaecheZ.vmax(), 20, 20, new Color3f(0f, 1f,	1f))
+				bSplineFlaecheYZ.kontrollPolygon(3, 3, kontrollpunkteFlaecheYZ),
+				bSplineFlaecheYZ.kontrollPunkte(0.05f, 3, 3,	kontrollpunkteFlaecheYZ, new Color3f(1f, 1f, 1f)),
+				bSplineFlaecheYZ.segmentierteFlaeche(bSplineFlaecheYZ.umin(), bSplineFlaecheYZ.vmin(),bSplineFlaecheYZ.umax(), bSplineFlaecheYZ.vmax(), 20, 20, new Color3f(0f, 1f,	0f)),
+		
+				bSplineFlaecheDreieck.kontrollPolygon(3, 3, kontrollpunkteFlaecheDreieck),
+				bSplineFlaecheDreieck.kontrollPunkte(0.05f, 3, 3,	kontrollpunkteFlaecheDreieck, new Color3f(1f, 1f, 1f)),
+				bSplineFlaecheDreieck.segmentierteFlaeche(bSplineFlaecheDreieck.umin(), bSplineFlaecheDreieck.vmin(),bSplineFlaecheDreieck.umax(), bSplineFlaecheDreieck.vmax(), 20, 20, new Color3f(0.6f, 0.6f, 0.6f))
+		
 		};
 
 		// Visualisierung starten
